@@ -15,10 +15,10 @@ variable "anycast_gateway_mac" {
 }
 
 variable "vlan_interfaces" {
-  description = "List of VLAN interfaces configured with command `fabric forwarding mode anycast-gateway`. Choices `mode`: `standard`, `anycastGW`, `proxyGW`. Default value `mode`: `standard`."
+  description = "List of VLAN interfaces configured with command `fabric forwarding mode anycast-gateway`. Choices `mode`: `anycastGW`, `proxyGW`. Default value `mode`: `anycastGW`."
   type = list(object({
     id   = number
-    mode = string
+    mode = optional(string)
   }))
   default = []
 
@@ -31,8 +31,8 @@ variable "vlan_interfaces" {
 
   validation {
     condition = alltrue([
-      for v in var.vlan_interfaces : try(contains(["standard", "anycastGW", "proxyGW"], v.mode), v.mode == null)
+      for v in var.vlan_interfaces : try(contains(["anycastGW", "proxyGW"], v.mode), v.mode == null)
     ])
-    error_message = "`mode`: Allowed values are: `standard`, `anycastGW` or `proxyGW`."
+    error_message = "`mode`: Allowed values are: `anycastGW` or `proxyGW`."
   }
 }

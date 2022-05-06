@@ -19,7 +19,7 @@ resource "nxos_hmm_interface" "hmmFwdIf" {
   for_each     = local.vlan_interfaces
   device       = var.device
   interface_id = "vlan${each.value.id}"
-  mode         = each.value.mode
+  mode         = each.value.mode != null ? each.value.mode : "anycastGW"
 
   depends_on = [
     nxos_hmm_instance.hmmFwdInst

@@ -33,12 +33,11 @@ module "main" {
   anycast_gateway_mac = "20:20:00:00:10:12"
   vlan_interfaces = [
     {
-      id   = 14
-      mode = "anycastGW"
+      id = 14
     },
     {
       id   = 15
-      mode = "anycastGW"
+      mode = "proxyGW"
     }
   ]
 
@@ -91,5 +90,21 @@ resource "test_assertions" "hmmFwdIf_14" {
     description = "mode"
     got         = data.nxos_hmm_interface.hmmFwdIf_14.mode
     want        = "anycastGW"
+  }
+}
+
+data "nxos_hmm_interface" "hmmFwdIf_15" {
+  interface_id = "vlan15"
+
+  depends_on = [module.main]
+}
+
+resource "test_assertions" "hmmFwdIf_15" {
+  component = "hmmFwdIf_15"
+
+  equal "mode" {
+    description = "mode"
+    got         = data.nxos_hmm_interface.hmmFwdIf_15.mode
+    want        = "proxyGW"
   }
 }
