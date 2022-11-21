@@ -12,7 +12,7 @@ Model Documentation: [Link](https://developer.cisco.com/docs/cisco-nexus-3000-an
 ```hcl
 module "nxos_fabric_forwarding" {
   source  = "netascode/fabric-forwarding/nxos"
-  version = ">= 0.1.0"
+  version = ">= 0.2.0"
 
   anycast_gateway_mac = "20:20:00:00:10:12"
   vlan_interfaces = [
@@ -31,7 +31,7 @@ module "nxos_fabric_forwarding" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_nxos"></a> [nxos](#requirement\_nxos) | >= 0.3.8 |
 
 ## Providers
@@ -46,7 +46,7 @@ module "nxos_fabric_forwarding" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_device"></a> [device](#input\_device) | A device name from the provider configuration. | `string` | `null` | no |
 | <a name="input_anycast_gateway_mac"></a> [anycast\_gateway\_mac](#input\_anycast\_gateway\_mac) | Fabric forwarding anycast gateway mac specified by command `fabric forwarding anycast-gateway-mac`. Format: `XX:XX:XX:XX:XX:XX`. | `string` | n/a | yes |
-| <a name="input_vlan_interfaces"></a> [vlan\_interfaces](#input\_vlan\_interfaces) | List of VLAN interfaces configured with command `fabric forwarding mode anycast-gateway`. Choices `mode`: `anycastGW`, `proxyGW`. Default value `mode`: `anycastGW`. | <pre>list(object({<br>    id   = number<br>    mode = optional(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_vlan_interfaces"></a> [vlan\_interfaces](#input\_vlan\_interfaces) | List of VLAN interfaces configured with command `fabric forwarding mode anycast-gateway`. Choices `mode`: `anycastGW`, `proxyGW`. Default value `mode`: `anycastGW`. | <pre>list(object({<br>    id   = number<br>    mode = optional(string, "anycastGW")<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

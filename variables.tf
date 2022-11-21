@@ -18,7 +18,7 @@ variable "vlan_interfaces" {
   description = "List of VLAN interfaces configured with command `fabric forwarding mode anycast-gateway`. Choices `mode`: `anycastGW`, `proxyGW`. Default value `mode`: `anycastGW`."
   type = list(object({
     id   = number
-    mode = optional(string)
+    mode = optional(string, "anycastGW")
   }))
   default = []
 
